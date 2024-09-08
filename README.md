@@ -1,4 +1,4 @@
-# CodSoft-Java Programmer-Internship
+# CodSoft-Java Programming-Internship
 
 Task-1 >>NUMBER GAME
 
