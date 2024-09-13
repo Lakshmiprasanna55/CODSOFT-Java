@@ -1,0 +1,120 @@
+#JAVA Code
+**********************************************************************************************
+##ATM
+*****
+
+import java.util.Scanner;
+
+public class ATMInterface {
+
+    public BankAccount bankAccount;
+
+    public ATMInterface(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    private void withdraw(){
+        System.out.println("Enter the amount you want to withdraw: ");
+        Scanner scanner = new Scanner(System.in);
+        int amount = scanner.nextInt();
+
+        withdraw(amount);    // Withdraw cash from the ATM
+    }
+
+    public void deposit() {
+        System.out.println("Enter the amount you want to deposit: ");
+        Scanner scanner = new Scanner(System.in);
+        int amount = scanner.nextInt();
+
+        deposit(amount);    // Deposit cash into the ATM
+    }
+
+    private void withdraw(int amount) {
+        if (bankAccount.getBalance() < amount) {
+            System.out.println("Insufficient funds");
+        }
+        else
+        {
+        bankAccount.withdraw(amount);
+        System.out.println("Amount Withdraw Sucessfully "+amount);    // Withdraw cash from the a/c
+        }
+    }
+
+    private void deposit(int amount) {
+        bankAccount.deposit(amount);
+        System.out.println("Amount Deposited Sucessfully "+amount);      // Deposits cash into the a/c
+
+    }
+
+    private void checkBalance() {
+        System.out.println("Your account balance is: "+bankAccount.getBalance());     // Checks the a/c balance
+
+    }
+    
+    public static void main(String[] args){
+        BankAccount bankAccount = new BankAccount(1000);
+        ATMInterface atm = new ATMInterface(bankAccount);
+
+        int choice;
+        Scanner scanner = new Scanner(System.in);
+        do
+        {
+        System.out.println("ATM Menu");
+        System.out.println("1. Check Balance");
+        System.out.println("2. Deposit");
+        System.out.println("3. Withdraw");
+        System.out.println("4. Exit");
+
+        System.out.println("Please enter your choice: ");
+        choice = scanner.nextInt();
+
+        switch (choice) {
+            case 1:
+            	atm.checkBalance();
+                break;
+            case 2:
+            	atm.deposit();
+                break;
+            case 3:
+            	atm.withdraw();
+                break;
+            case 4:
+                System.out.println("Exiting the ATM.. Have a great day!!");
+                break;
+            default:
+                System.out.println("Invalid choice");
+        	}
+        
+        }while(choice!=4);
+        scanner.close();
+    }
+}
+
+**********************************************************************************************************
+
+#BankAccount
+************
+
+public class BankAccount {
+	
+	private int balance;
+	
+	public BankAccount(int balance) {
+		this.balance=balance;
+	}
+	
+	public void withdraw (int amount) {
+		if(balance<amount) {
+			System.out.println("Insufficient funds");
+		}
+		balance-=amount;
+	}
+	
+	public void deposit(int amount) {
+		balance+=amount;
+	}
+	
+	public int getBalance() {
+		return balance;
+	}
+}
