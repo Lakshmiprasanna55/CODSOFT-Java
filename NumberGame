@@ -1,0 +1,53 @@
+#JAVA Code
+*****************************************************************************************************
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class NumberGame {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.println("Heyy there!! I'm Lakshmiprasanna back with a new CodSoft task");
+        System.out.println("Let's play some Number Guessing Game");
+        System.out.println("How many rounds would you prefer to play..? ");
+        int rounds = scanner.nextInt();
+        int totalScore = 0;
+
+        for (int roundNum = 1; roundNum <= rounds; roundNum++) {
+            System.out.println("I'm thinking of a number between 1 and 100.");
+            System.out.println("\nRound " + roundNum + " - Guess My number Here!");
+            int number = random.nextInt(100) + 1; 
+            int attempts = 0;
+            int maxAttempts = 7;
+            boolean guessedCorrectly = false;
+
+            while (attempts < maxAttempts) {
+                System.out.print("Attempt " + (attempts + 1) + "/" + maxAttempts + ": Enter your guess (1-100): ");
+                int guess = scanner.nextInt();
+                attempts++;
+
+                if (guess < number) {
+                    System.out.println("Try another number, it's Too low!");
+                } else if (guess > number) {
+                    System.out.println("Try another number, it's Too high!");
+                } else {
+                    System.out.println("Congratulations! You guessed the number " + number + " correctly in " + attempts + " attempts.");
+                    totalScore += maxAttempts - attempts + 1; 
+                    guessedCorrectly = true;
+                    break;
+                }
+            }
+
+            if (!guessedCorrectly) {
+                System.out.println("Sorry..!! you've used all the " + maxAttempts + " attempts. The correct number was " + number + ".");
+            }
+        }
+
+        System.out.println("\nGame Over!! Your total score is: " + totalScore);
+        System.out.println("Thanks for playing!! See You Soon :)");
+        scanner.close();
+    }
+}
